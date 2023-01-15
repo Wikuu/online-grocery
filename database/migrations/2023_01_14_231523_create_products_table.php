@@ -21,7 +21,7 @@ return new class extends Migration
             $table->integer('weight');
             $table->integer('price');
             $table->string('description');
-            $table->foreignId('manufactur_id')->constrained('manufactures')->onDelete('cascade');
+            $table->foreignId('manufacture_id')->constrained('manufactures')->onDelete('cascade');
             $table->timestamps();
         });
     }
