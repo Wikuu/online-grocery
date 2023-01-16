@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AddressController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
 
 // ** Auth Routes **
@@ -24,8 +25,21 @@ Route::middleware('auth:api')->group(function () {
         Route::get("/by-user/{id}", [AddressController::class, "showByUser"])->whereNumber("id");
 
         Route::post("/", [AddressController::class, "store"]);
-        Route::post("/{id}", [AddressController::class, "update"])->whereNumber("id");
+
+        Route::put("/{id}", [AddressController::class, "update"])->whereNumber("id");
 
         Route::delete("/{id}", [AddressController::class, "delete"])->whereNumber("id");
+    });
+
+    // ** Category Routes **
+    Route::prefix("category")->group(function () {
+        Route::get("/", [CategoryController::class, "index"]);
+        Route::get("/{id}", [CategoryController::class, "show"])->whereNumber("id");
+
+        Route::post("/", [CategoryController::class, "store"]);
+
+        Route::put("/{id}", [CategoryController::class, "update"])->whereNumber("id");
+
+        Route::delete("/{id}", [CategoryController::class, "delete"])->whereNumber("id");
     });
 });
