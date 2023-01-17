@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ProductCreateRequest;
 use App\Http\Requests\ProductUpdateRequest;
+use App\Models\CategoryProduct;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -13,6 +14,7 @@ class ProductController extends Controller
     public function store(ProductCreateRequest $request)
     {
 
+        // Upload Image
         try {
             $imageName = time() . '.' . $request->file("image")->extension();
             $request->image->move(public_path('images'), $imageName);
@@ -33,6 +35,17 @@ class ProductController extends Controller
             ], 500);
         }
 
+        $categoryProduct = CategoryProduct::create([
+            "category_id" => $request->category_id,
+            "product_id" => $product->id
+        ]);
+
+        if(!$categoryProduct) {
+            return response()->json([
+                "message" => "Product could not added to category"
+            ], 500);
+        }
+
         return response()->json(["product" => $product, "message" => "Product created"], 201);
     }
 
@@ -40,6 +53,7 @@ class ProductController extends Controller
     public function update(ProductUpdateRequest $request, $id)
     {
         $product = Product::find($id);
+
         if (!$product) {
             return response()->json([
                 "message" => "Product could not be found"
@@ -47,6 +61,14 @@ class ProductController extends Controller
         }
 
         $update = $product->update($request->all());
+
+        if($request->has("category_id")) {
+            $categoryProduct = CategoryProduct::where("product_id", $id)->first();
+            $categoryProduct->update([
+                "category_id" => $request->category_id
+            ]);
+        }
+
         if (!$update) {
             return response()->json([
                 "message" => "Product could not be updated"
