@@ -31,6 +31,7 @@ class ProductCreateRequest extends FormRequest
             "price" => "required|numeric",
             "description" => "required|string",
             "manufacture_id" => "required|integer",
+            "category_id" => "required|integer"
         ];
     }
 
@@ -48,7 +49,8 @@ class ProductCreateRequest extends FormRequest
             "weight.required" => "Weight is required",
             "price.required" => "Price is required",
             "description.required" => "Description is required",
-            "manufacture_id.required" => "Manufactur is required",
+            "manufacture_id.required" => "Manufacture is required",
+            "category_id.required" => "Category is required",
 
             "name.string" => "Name must be string",
             "unit.string" => "Unit must be string",
@@ -56,7 +58,8 @@ class ProductCreateRequest extends FormRequest
             "weight.numeric" => "Weight must be numeric",
             "price.numeric" => "Price must be numeric",
             "description.string" => "Description must be string",
-            "manufacture_id.integer" => "Manufactur must be integer",
+            "manufacture_id.integer" => "Manufacture must be integer",
+            "category_id.integer" => "Category must be integer",
         ];
     }
 }

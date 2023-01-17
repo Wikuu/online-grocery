@@ -31,6 +31,7 @@ class ProductUpdateRequest extends FormRequest
             "price" => "numeric",
             "description" => "string",
             "manufacture_id" => "integer",
+            "category_id" => "integer",
         ];
     }
 
@@ -48,7 +49,8 @@ class ProductUpdateRequest extends FormRequest
             "weight.numeric" => "Weight must be numeric",
             "price.numeric" => "Price must be numeric",
             "description.string" => "Description must be string",
-            "manufacture_id.integer" => "Manufactur must be integer",
+            "manufacture_id.integer" => "Manufacture must be integer",
+            "category_id.integer" => "Category must be integer",
         ];
     }
 }
