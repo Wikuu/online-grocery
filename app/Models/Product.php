@@ -16,6 +16,6 @@ class Product extends Model
         'weight',
         'price',
         'description',
-        'manufactur_id',
+        'manufacture_id',
     ];
 }
