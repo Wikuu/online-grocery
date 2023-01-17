@@ -31,6 +31,10 @@ class CategorySeeder extends Seeder
             [
                 "name" => "Laptop",
                 "parent_id" => 1
+            ],
+            [
+                "name" => "Drink",
+                "parent_id" => null
             ]
         ];
 

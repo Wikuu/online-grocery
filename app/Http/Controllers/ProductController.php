@@ -13,7 +13,6 @@ class ProductController extends Controller
     // Create Product
     public function store(ProductCreateRequest $request)
     {
-
         // Upload Image
         try {
             $imageName = time() . '.' . $request->file("image")->extension();
@@ -25,8 +24,9 @@ class ProductController extends Controller
             ], 500);
         }
 
-        $data = $request->all();
+        $data = $request->except("category_id");
         $data["image"] = $imageName;
+
         $product = Product::create($data);
 
         if (!$product) {
