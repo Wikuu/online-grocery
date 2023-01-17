@@ -4,6 +4,7 @@ use App\Http\Controllers\AddressController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ManufactureController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
 // ** Auth Routes **
@@ -54,5 +55,17 @@ Route::middleware('auth:api')->group(function () {
         Route::put("/{id}", [ManufactureController::class, "update"])->whereNumber("id");
 
         Route::delete("/{id}", [ManufactureController::class, "delete"])->whereNumber("id");
+    });
+
+    // ** Product Routes **
+    Route::prefix("product")->group(function () {
+        Route::get("/", [ProductController::class, "index"]);
+        Route::get("/{id}", [ProductController::class, "show"])->whereNumber("id");
+
+        Route::post("/", [ProductController::class, "store"]);
+
+        Route::put("/{id}", [ProductController::class, "update"])->whereNumber("id");
+
+        Route::delete("/{id}", [ProductController::class, "delete"])->whereNumber("id");
     });
 });
